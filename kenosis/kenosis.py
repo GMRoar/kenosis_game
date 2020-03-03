@@ -12,18 +12,27 @@ class setup:
         |  /  \ \| (____/\| )  \  || (___) |/\____) |___) (___/\____) |
         |_/    \/(_______/|/    )_)(_______)\_______)\_______/\_______)
 
-(C) Nathanial Landers & Leyton Frecklington 2020
-"""
-import time
-print(startup)
-choice = None
-class intro:
-    #Defines the lines for looking at the sign.
-    def sign():
-           print('You read the Neon Sign. The sign reads: "Tutorial".')
-           print('Nate has a fat belly')
-           time.sleep(1)
-    #Defines the lines for looking at all (in the tutorial).            
+        (C) Nathanial Landers & Leyton Frecklington 2020
+        """
+        print(startupe)
+        print("Would you like to play the tutorial (Recommended)? (Y/N)")
+        playTutorial = input(">> ")
+        if 'y' in playTutorial:
+            tutorial.tutorialintro()
+        if 'Y' in playTutorial:
+            tutorial.tutorialintro()
+        else:
+            game()
+
+class tutorial:
+    #Variables required for inventory.
+    coins = 0
+    
+    # Look commands.
+    def looksign():
+        print("You look at the sign. The sign reads: 'Tutorial'.")
+        time.sleep(1)
+        tutorial.tutorialroom()
     def lookall():
         print("You look at your surroundings. You see: sign, chair, table, window.")
         time.sleep(1)
@@ -100,12 +109,7 @@ class intro:
         else:
             print("I didn't understand what you meant. Try again.")
             tutorial.tutorialroom()
-class game:
-    time.sleep(2)
-setup.startup()
-
-
-class Store:
+    class Store:
     #Defines the lines for using the stick
     def usestick():
         print("You try to pry at the bars with the stick, but the stick is too thin and breaks before any bars are bent")
@@ -134,7 +138,7 @@ class Intro:
         time.sleep(2)
         print("Crucifix Acquired!")
         print("Upon walking around, you discover that you're locked in a small cage, possibly for chickens. Some of the bars are bent, but you're not strong enough to break them")
-  
+
 class Game:
     def challenge(): 
         #First user challenge
@@ -148,4 +152,8 @@ class Game:
         print("Will you: Use the crucifix to pry the cage open")
         #Asks user for choice
         choice = input("What will you choose? ")
-    
+
+    time.sleep(2)
+setup.startup()
+
+
