@@ -17,6 +17,7 @@ class intro:
     #Defines the lines for looking at the sign.
     def sign():
            print('You read the Neon Sign. The sign reads: "Tutorial".')
+           print('Nate has a fat belly')
            time.sleep(1)
     #Defines the lines for looking at all (in the tutorial).            
     def lookall():
