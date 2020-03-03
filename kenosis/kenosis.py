@@ -22,7 +22,7 @@ class setup:
         if 'Y' in playTutorial:
             tutorial.tutorialintro()
         else:
-            game()
+            game.l1intro()
 
 class tutorial:
     #Variables required for inventory.
@@ -109,35 +109,78 @@ class tutorial:
         else:
             print("I didn't understand what you meant. Try again.")
             tutorial.tutorialroom()
-    class Store:
-    #Defines the lines for using the stick
+
+class game:
+    #Art
+    necklace = """
+
+WW:WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW@:WWW
+W@:WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#+WWW
+W*=WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW:@WWW
+WW:#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW@+WWWW
+WWW:@WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW-@WWWW
+WWWW+=WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW:#WWWWW
+WWWWW@:@WWWWWWWWWWWWWWWWWWWWWWWWWWW*+WWWWWWW
+WWWWWWWW++@WWWWWWWWWWWWWWWWWWWWWW=+WWWWWWWWW
+WWWWWWWWWWW*:=WWWWWWWWWWWWWWWWW=:WWWWWWWWWWW
+WWWWWWWWWWWWWWW@=++*=#@@@@=+:=WWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWW*=@:@WWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWW*.*WWWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWW-...................-WWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWW...#WWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWW...@WWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWW-..WWWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWW-..WWWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWW:..WWWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWW:..WWWWWWWWWWWWWWWWWWWW
+    """
+    #Defines use commands
     def usestick():
         print("You try to pry at the bars with the stick, but the stick is too thin and breaks before any bars are bent")
         if "stick" in choice:
             time.sleep(2)
             store.usestick()
-    #Defines the lines for using the spoon
+
     def usespoon():
         print("You dig a big enough hole underneath the base of the cage to crawl out the bottom")
         if "spoon" in choice:
             time.sleep(3)
             store.usespoon()
-    #Defines and stores the lines for using the crucifix
+
     def usecrucifix():
          print("The crucifix might be useful later, let's not use it here.")
          if "crucifix" in choice:
              store.usecrucifix()
+    def lookall():
+        print("You feel around on the ground. You feel a few objects on the ground that feel like a stick, a spoon and a necklace.")
+        game.logic()
+    #Defines look commands
+    def looknecklace():
+        print(game.necklace)
+        print("You look at the necklace. It is made of a thin, linked chain and a wooden crucifix hanging off it.")
+        game.logic()
+        
 
-
-class Intro:
-    def intro():
+    # Game intro
+    def l1intro():
         #plain text for an introduction to the scene
         print("You wake on the cold dirt, gasping for air, with the only one you muster leaving a thick layer of dust in your mouth.")
-        print("It`s freezing cold, the only noise you hear are distant crickets and the trees swaying side-to-side as they are caught by the wind")
-        print("You feel around for your glasses, with no luck, but you do find a what feels to be a stick, a spoon, and a crucifix on the ground")
+        print("It's freezing cold, the only noise you hear are distant crickets and the trees swaying side-to-side as they are caught by the wind.")
+        print("You can't see anything.")
         time.sleep(2)
-        print("Crucifix Acquired!")
-        print("Upon walking around, you discover that you're locked in a small cage, possibly for chickens. Some of the bars are bent, but you're not strong enough to break them")
+        game.logic()
+       #"You feel around for your glasses, with no luck, but you do find a what feels to be a stick, a spoon, and a crucifix on the ground." 
+        # print("Crucifix Acquired!")
+       # print("Upon walking around, you discover that you're locked in a small cage, possibly for chickens. Some of the bars are bent, but you're not strong enough to break them")
+     
+       # Game Logic
+
+    def logic():
+        choice = input(">> ")
+        if 'look all' in choice:
+            game.lookall()
+        if 'look necklace' in choice:
+            game.looknecklace()
 
 class Game:
     def challenge(): 
