@@ -405,7 +405,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
              store.usenecklace()
     #Defines look commands
     def lookall():
-         if 'where' in choicesg:
+         if 'where' in choiceg:
              game.l1game()
          if 'look all' in choiceg:
              if cansee <= 0:
