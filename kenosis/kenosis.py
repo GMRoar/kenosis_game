@@ -521,6 +521,8 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             game.pickupall()
         if 'use stick' in choice:
             game.usestickall()
+        if 'use spoon' in choice:
+            game.usespoonall()        
         else:
             print("I didn't understand what you meant. Try again.")
             game.logic()
