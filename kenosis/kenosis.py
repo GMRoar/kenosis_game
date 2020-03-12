@@ -22,7 +22,7 @@ class setup:
         if 'Y' in playTutorial:
             tutorial.tutorialintro()
         else:
-            game.l1intro()
+            game.l1game()
 
 class tutorial:
     def exitt():
