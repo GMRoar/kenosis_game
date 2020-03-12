@@ -507,8 +507,6 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             game.lookall()
         if 'look stick' in choice:
             game.lookall()
-        if 'look spoon' in choice:
-            game.lookall()
         if 'inventory' in choice:
             game.inventory()
         if 'pick-up stick' in choice:
