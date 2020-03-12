@@ -25,6 +25,15 @@ class setup:
             game.l1intro()
 
 class tutorial:
+    def exitt():
+            print("Are you sure? (Y/N)")
+            exit = input(">>> ")
+            if exit == 'Y':
+                exit()
+            elif exit == 'y':
+                exit()
+            else:
+                tutorial.tutorialroom()
     #Variables required for inventory.
     coins = 0
     pickupcoinsused = 0
@@ -33,7 +42,7 @@ class tutorial:
     def endtutorial():
         print("Starting Kenosis...")
         time.sleep(2)
-        game.l1intro()
+        game.l1game()
     def where():
         tutorial.tutorialintro()
     def usecoins():
@@ -159,11 +168,24 @@ class tutorial:
             tutorial.tutorialroom()
 
 class game:
-    #Inventory Variables
+    def exit():
+        print("Are you sure? (Y/N)")
+        exit = input(">>> ")
+        if exit == 'Y':
+            exit()
+        elif exit == 'y':
+            exit()
+        else:
+            game.logic()
+    #Progression Variables
     inventorys = []
+    spoonlock = 0
     spoon = 0
     stick = 0
     necklace = 0
+    matches = 3
+
+    cansee = 0
       # Inventory
     #def inventory():
        #  for key, value in game.inventorys.items():
@@ -179,7 +201,8 @@ class game:
     def inventory():
         print("You check your pockets, and find:", game.inventorys[::1])
         game.logic()
-            
+        
+       
   
     
     
@@ -269,72 +292,217 @@ WWWWWWWWWWWWWWWWWW*+:-.............*WWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
     """
+
     #Defines use commands
-    def usestick():
-        print("You try to pry at the bars with the stick, but the stick is too thin and breaks before any bars are bent")
-        if "stick" in choice:
+    # use stick all uses
+    def usestickall():
+        if 'stick' in game.inventorys:
+            if 'use stick' in choiceg:
+                print("Please make sure you include what you want to use your stick on.")
+                print("Example: use stick bars")
+                time.sleep(2)
+                game.logic()
+        else:
+          print("You do not have a stick")
+          time.sleep(2)
+          game.logic()
+
+        if "use stick bars" in choiceg:
+            if "stick" in game.inventorys:
+                print("You try to pry at the bars with the stick, but the stick is too thin and breaks before any bars are bent.")
+                time.sleep(2)
+                game.inventorys.remove("stick")
+                game.logic()
+            else:
+                print("You do not have a stick.")
+                time.sleep(2)
+                game.logic()
+        elif "use stick lock" in choiceg:
+            if "stick" in game.inventorys:
+                print("You try to pick the lock with the stick, but the stick is too thick and can't fit in the lock mechanism.")
+                time.sleep(2)
+                game.logic()
+            else:
+                print("You do not have a stick.")
+                time.sleep(2)
+                game.logic()
+        elif "use stick matchbox" in choiceg:
+           if "stick" in game.inventorys: 
+            if "matchbox" in game.inventorys:
+                print("You try to light the stick on fire, and it works. You see some of the room around you.")
+                cansee = 1
+                time.sleep(2)
+                game.logic()
+            else: 
+                print("You do not have a matchbox to use.")
+                time.sleep(2)
+                game.logic()
+           else:
+               print("You do not have a stick.")
+               time.sleep(2)
+               game.logic()
+
+# use spoon logics
+    def usespoonall():
+        if "use spoon lock" in game.logic.choice:
+            game.canuselock()
+        if "use spoon bars" in game.logic.choice:
+            if 'spoon' in game.inventorys:
+                print("You try to pry at the bars with the spoon, but it is too small to do anything with. You give up.")
+                time.sleep(2)
+                game.logic()
+            else:
+                print("You do not have a spoon")
+                time.sleep(2)
+                game.logic()
+
+        if "use spoon matchbox" in game.logic.choice:
+            if game.matches >= 1:
+                print("You heat up the spoon. Now you have a hot spoon. It does nothing.")
+                matches = game.matches - 1
+                time.sleep(2)
+                game.logic()
+            else:
+                print("You are out of matches.")
+                time.sleep(2)
+                game.logic()
+    def canuselock():
+        if game.spoonlock == 0:
+            game.usespoonlogic()
+        else:
+            print("You have already picked the lock.")
             time.sleep(2)
-            store.usestick()
+            game.logic()
+   
+           
+            
+            
+    def usespoonlogic():
+        if "spoon" in game.inventorys:
+            if game.spoonlock == 1:
+                print("You use the spoon on the lock. With a bit of time, you manage to pick the lock.")
+                print("")
+                time.sleep(2)
+                game.spoonlock == 0
+                game.logic()
+            else:
+                print("You have already unlocked the gate.")
+                time.sleep(2)
+                game.logic()
+        else:
+            print("You do not have a spoon.")
+            time.sleep(2)
+            game.logic()
 
-    def usespoonlock():
-        print("You use the spoon on the lock. With a bit of time, you manage to pick the lock,")
-        
+    
+ 
 
 
-    def usecrucifix():
-         print("The crucifix might be useful later, let's not use it here.")
-         if "crucifix" in choice:
-             store.usecrucifix()
+
+    def usenecklacelock():
+         print("You try to pick the lock with the crucifix on the end of the necklace, no luck.")
+         if "necklace" in choice:
+             store.usenecklace()
     #Defines look commands
     def lookall():
-        print("You feel around on the ground. You feel a few objects on the ground that feel like a stick, a spoon and a necklace.")
-        game.logic()
+        if 'where' in choicesg:
 
-    def looknecklace():
-        print(game.necklace)
-        print("You look at the necklace. It is made of a thin, linked chain and a wooden crucifix hanging off it.")
-        game.logic()
+         if 'look all' in choiceg:
+             if cansee <= 0:
+                print("You feel around on the ground. You feel a few objects on the ground but it's too dark to know what they are, they feel like a stick, a matchbox and a necklace.")
+             elif cansee == 1:
+                 print("You see some of the room around you. It's dark, but you can see the faint outline of a few objects on the ground.")
+                 time.sleep(1)
+                 print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
 
-    def lookstick():
-        print(game.stick)
-        print("You look at the stick. It's a stick.")
+         if "look necklace" in choiceg:
+            print(game.necklace)
+            print("You look at the necklace. It is made of a thin, linked chain and a wooden crucifix hanging off it, one side of it appears to be sharper than the others.")
+            game.logic()
+         if "look stick" in choiceg:
+            print(game.stick)
+            print("You look at the stick. It's a stick.")
+            game.logic()
+         if "look matchbox" in choiceg:
+            print(game.matchbox)
+            print("You look at the matchbox, it contains 6 matches and the striking surface is worn down to almost nothing")
+            game.logic()
+         if "look spoon" in choiceg:
+             print(game.spoon)
+             print("You look at the spoon. It could maybe be used to pick a lock.")
+             game.logic()
     #Defines pick-up commands
-    def pickupstick():
-        print(game.stick)
-        print("You pick up the stick, and put it in your pocket.")
-        game.inventorys.append("stick")
+    def pickupall():
+        if "pick-up stick" in choiceg:
+            if "stick" not in game.inventorys:
+                print(game.stick)
+                print("You pick up the stick, and put it in your pocket.")
+                game.inventorys.append("stick")
+                time.sleep(2)
+                game.logic()
+            else:
+                print("You already have a stick.")
+                time.sleep(2)
+                game.logic()
+
+        if "pick-up spoon" in choiceg:
+            if "spoon" not in inventorys:
+                print(game.spoon)
+                print("You pick up the spoon, and put it in your pocket.")
+                game.inventorys.append("spoon")
+                game.logic()
+            else:
+                print("You already have a spoon.")
+                time.sleep(2)
+                game.logic()
+
+        if "pick-up necklace" in choiceg:
+            if "necklace" not in choiceg:
+                print(game.necklace)
+                print("You pick up a necklace, and place it around your neck.")
+                game.inventorys.append("necklace")
+                game.logic()
+            else:
+                print("You already have a necklace.")
+
+    def pickupmatchbox():
+        print(game.matchbox)
+        print("You pick up the matchbox, and have a look inside. The matchbox only has 3 matches, and the striking surface appears heavily used.")
+        game.inventorys.append("matchbox")
         game.logic()
-    def pickupspoon():
-        print(game.spoon)
-        print("You pick up the spoon, and put it in your pocket.")
-        game.inventorys.append("spoon")
-        game.logic()
-    
 
         
 
     # Game intro
-    def l1intro():
-        #plain text for an introduction to the scene
+    def l1game():
+        #plain text for an introduction to the scene, used for cansee = 0
         print("You wake on the cold dirt, gasping for air, with the only one you muster leaving a thick layer of dust in your mouth.")
+        time.sleep(2)
         print("It's freezing cold, the only noise you hear are distant crickets and the trees swaying side-to-side as they are caught by the wind.")
-        print("You can't see anything.")
+        time.sleep(2)
+        if game.cansee == 0:
+            print("You can't see anything.")
+        elif cansee == 1:
+            print("You see some of the area around you. It's dark, but you can see the faint outline of trees, as well as a few objects on the ground.")
+            print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
+
+        elif cansee == 2:
+            print(game.cansee2) 
         time.sleep(2)
         game.logic()
-       #"You feel around for your glasses, with no luck, but you do find a what feels to be a stick, a spoon, and a crucifix on the ground." 
-        # print("Crucifix Acquired!")
-       # print("Upon walking around, you discover that you're locked in a small cage, possibly for chickens. Some of the bars are bent, but you're not strong enough to break them")
-     
-       # Game Logic
-       # Type look (object) or pick-up (object) or inventory to open up inventory. 
+    
+        
+
     def logic():
+        global choiceg
         choice = input(">> ")
+        choiceg = choice
         if 'look all' in choice:
             game.lookall()
         if 'look necklace' in choice:
-            game.looknecklace()
+            game.lookall()
         if 'look stick' in choice:
-            game.lookstick()
+            game.lookall()
         if 'look spoon' in choice:
             game.lookspoon()
         if 'inventory' in choice:
@@ -347,12 +515,79 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             game.pickupnecklace()
         if 'pick-up matchbox' in choice:
             game.pickupmatchbox()
+        if 'use stick' in choice:
+            game.usestickall()
+        else:
+            print("I didn't understand what you meant. Try again.")
+            game.logic()
 
+class l2game:
+    def l2game():
+        print("churchnigga")
 class Game:
 
     time.sleep(2)
 setup.startup()
 
 """
+- Wake up in cage
+- Get out of cage
+- Find self in woods
+- Walk around woods - lots of cereal(crunchy) leaves
+- Hear noises (possibly running footsteps(creating more cereal noises) or growls)
+- Find abandoned church
+- Explore church - find lockpicks, keys, letters that you can read
+- Find bodybags
+- Try run from church
+- Hit tree
+- KO
+- Wake up in church hung upside down amongst the bodybags
+- Use necklace to cut rope that you're being hung by - Give option to pick up rope
+- Sneak out of church, avoiding the WEIRDOS - official name btw "WEIRDOS"
+- Find beheading axe out back of church - pick that shit up fam
+- Hear people yelling and screaming 
+- Door behind you opens
+- Piss bolt out of church - give player options to hide (behind a tree, nearby shed, river bank etc.)
+    - Behind tree doesn't work, forced to find somewhere else 
+    - Cut self on something in shed, have to find something to stop the bleeding
+    - Completely safe on river bank
+- Find a nearby outhouse, maybe they have something to stop bleeding - or to pick up
+- Enter outhouse
+- Completely empty
+- Go outside to find WEIRDOS with lanterns walking around
+- Stay in outhouse for a while
+- Find a basement
+- Enter basement
+- Find shit tonnes of supplies, including bandages (3x), but cut self on way down forcing to use 2 of 3 bandages to stop bleeding
+- Other supplies include:
+    - Fire for warmth
+    - Food
+    - Water
+    - A bed
+    - More letters / diary entries
+- Sleep in basement for night
+- Wake up to WEIRDOS taking you somewhere, you're completely stripped bare, they took everything 
+- You can choose to:
+    - Run
+    - Stay and let them do whatever
+    - Yell at them to negotiate
+- Nothing works - forced to let the WEIRDOS do whatever
+    - Running ends up in them catching you, never works
+    - They don't speak any English so negotiating won't work
+- They take you to the church again 
+- A ritual is being set up 
+    - You're getting sacrificed
+- Try to run out of church, works, but they end up catching you
+- Try to run again and find the cage where you initially woke up
+- Daylight breaks (coincidence amirite)
+- You see a switch, wasn't there before
+- Give choice of flicking switch
+    - If yes: clear all text (if you can do that) and end game 
+    - If no: clear all text (again, if you can do that) and restart game, forcing player to go through it all to complete
 
+    If yes: give achievement: The easy way out
+    If no: give achievement: A real competitor-
+
+The end :)
 """
+#make sure to give more options to pick stuff up during rest of story.
