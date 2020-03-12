@@ -27,6 +27,7 @@ class setup:
 class tutorial:
     #Variables required for inventory.
     coins = 0
+    pickupcoinsused = 0
     
     # Look commands.
     def endtutorial():
@@ -36,22 +37,26 @@ class tutorial:
     def where():
         tutorial.tutorialintro()
     def usecoins():
-        if coins == 1:
+        if tutorial.coins == 1:
             print("You throw the coins across the room.")
-            coins = 0
-        time.sleep(1)
+            tutorial.coins = 0
+            tutorial.pickupcoinsused = 0
+            tutorial.tutorialroom()
+        else:
+            print("You don't have coins.")
+        time.sleep(2)
         tutorial.tutorialroom()
     def looksign():
         print("You look at the sign. The sign reads: 'Tutorial'.")
-        time.sleep(1)
+        time.sleep(2)
         tutorial.tutorialroom()
     def lookall():
-        print("You look at your surroundings. You see: sign, chair, table, window.")
-        time.sleep(1)
+        print("You look at your surroundings. You see: sign, chair, table, window, coins.")
+        time.sleep(2)
         tutorial.tutorialroom()
     def lookchair():
         print("You inspect the chair. It's just a wooden chair. It's starting to decay from rot.")
-        time.sleep(1)
+        time.sleep(2)
         tutorial.tutorialroom()
     def looktable():
         print("You inspect the table. It's just a wooden table. It's starting to decay from rot.")
@@ -62,9 +67,14 @@ class tutorial:
         tutorial.tutorialroom()
     # Pick-up commands.
     def pickupcoins():
-        print("You pick-up the coins, and place them in your pocket.")
-        tutorial.coins = 1
-        tutorial.tutorialroom()
+        if tutorial.pickupcoinsused == 0:
+            print("You pick-up the coins, and place them in your pocket.")
+            tutorial.coins = 1
+            tutorial.pickupcoinsused = 1
+            tutorial.tutorialroom()
+        else:
+            print("You already have the coins.")
+            tutorial.tutorialroom()
 
     #Use commands.
 
@@ -85,31 +95,31 @@ class tutorial:
     def tutorialintro():
             print('Starting Tutorial...')
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("You awake in a dark room. Ahead is a wall, with a bright neon sign hanging on it. There is also a table, chair, window and some coins on the floor.")
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("Welcome to the tutorial. You can test the various commands that you will use in Kenosis to navigate, interact and inspect.")
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("These commands are: look, pick-up, where, inventory.")
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("The 'look' command let's you look at an object, or all objects. First try 'look all' to list all objects in a room, then 'look (obj)' to inspect it.")
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("The 'pick-up' command allows you to pick up an object. This will only happen on objects you can pick up though. Try 'pick-up (obj)'.")
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("The 'where' command repeats the scene opening, such as the 'Ahead is a wall, with a ...' at the start of this tutorial. Try 'where'.")
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("The 'inventory' command lists all items you have picked up. Try 'inventory'.")
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("The 'use' command allows you to use an object you have in your inventory. Try 'use (obj).")
             print("")
-            time.sleep(1)
+            time.sleep(3)
             print("Note: All commands are in lower-case.")
             print("")
             time.sleep(3)
@@ -150,19 +160,26 @@ class tutorial:
 
 class game:
     #Inventory Variables
-    inventorys = {"spoon":1,"stick":1,"necklace":1}
-
+    inventorys = []
+    spoon = 0
+    stick = 0
+    necklace = 0
       # Inventory
+    #def inventory():
+       #  for key, value in game.inventorys.items():
+       #     if value == 1:
+       #         print("You check your pockets, and find:", key)
+       #         time.sleep(1)
+       #         game.logic()
+       #     if value != 1:
+      ##          print("You find nothing in your pockets.")
+       #         time.sleep(1)
+       #         game.logic()
+
     def inventory():
-         for key, value in game.inventorys.items():
-            if value == 1:
-                print("You check your pockets, and find:", key)
-                time.sleep(1)
-                game.logic
-            if value != 1:
-                print("You find nothing in your pockets.")
-                time.sleep(1)
-                game.logic
+        print("You check your pockets, and find:", game.inventorys[::1])
+        game.logic()
+            
   
     
     
@@ -261,6 +278,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
     def usespoonlock():
         print("You use the spoon on the lock. With a bit of time, you manage to pick the lock,")
+        
 
 
     def usecrucifix():
@@ -284,8 +302,14 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
     def pickupstick():
         print(game.stick)
         print("You pick up the stick, and put it in your pocket.")
-        game.inventorys["stick"] = 1
+        game.inventorys.append("stick")
         game.logic()
+    def pickupspoon():
+        print(game.spoon)
+        print("You pick up the spoon, and put it in your pocket.")
+        game.inventorys.append("spoon")
+        game.logic()
+    
 
         
 
@@ -302,7 +326,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
        # print("Upon walking around, you discover that you're locked in a small cage, possibly for chickens. Some of the bars are bent, but you're not strong enough to break them")
      
        # Game Logic
-       
+       # Type look (object) or pick-up (object) or inventory to open up inventory. 
     def logic():
         choice = input(">> ")
         if 'look all' in choice:
@@ -325,20 +349,10 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             game.pickupmatchbox()
 
 class Game:
-    def challenge(): 
-        #First user challenge
-        print("Here are your options:")
-        time.sleep(2)
-        #Option A
-        print("Will you: Try to pry the cage open with the stick")
-        #Option B
-        print("Will you: Dig a hole underneath the cage with the spoon")
-        #Option C
-        print("Will you: Use the crucifix to pry the cage open")
-        #Asks user for choice
-        choice = input("What will you choose? ")
 
     time.sleep(2)
 setup.startup()
 
+"""
 
+"""
