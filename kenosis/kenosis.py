@@ -405,8 +405,8 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
              store.usenecklace()
     #Defines look commands
     def lookall():
-        if 'where' in choicesg:
-
+         if 'where' in choicesg:
+             game.l1game()
          if 'look all' in choiceg:
              if cansee <= 0:
                 print("You feel around on the ground. You feel a few objects on the ground but it's too dark to know what they are, they feel like a stick, a matchbox and a necklace.")
@@ -504,17 +504,17 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         if 'look stick' in choice:
             game.lookall()
         if 'look spoon' in choice:
-            game.lookspoon()
+            game.lookall()
         if 'inventory' in choice:
             game.inventory()
         if 'pick-up stick' in choice:
-            game.pickupstick()
+            game.pickupall()
         if 'pick-up spoon' in choice:
-            game.pickupspoon()
+            game.pickupall()
         if 'pick-up necklace' in choice:
-            game.pickupnecklace()
+            game.pickupall()
         if 'pick-up matchbox' in choice:
-            game.pickupmatchbox()
+            game.pickupall()
         if 'use stick' in choice:
             game.usestickall()
         else:
