@@ -449,6 +449,17 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 time.sleep(2)
                 game.logic()
 
+        if "pick-up matchbox" in choiceg:
+            if "matchbox" not in game.inventorys:
+                print("art")
+                print("You pick up the matchbox, and put it in your pocket.")
+                game.inventorys.append("matchbox")
+                game.logic()
+            else:
+                print("You already have a matchbox.")
+                time.sleep(2)
+                game.logic()
+
         if "pick-up necklace" in choiceg:
             if "necklace" not in choiceg:
                 print(game.necklace)
