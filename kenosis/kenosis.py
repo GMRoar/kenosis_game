@@ -295,17 +295,6 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
     #Defines use commands
     # use stick all uses
     def usestickall():
-        if 'stick' in game.inventorys:
-            if 'use stick' in choiceg:
-                print("Please make sure you include what you want to use your stick on.")
-                print("Example: use stick bars")
-                time.sleep(2)
-                game.logic()
-        else:
-          print("You do not have a stick")
-          time.sleep(2)
-          game.logic()
-
         if "use stick bars" in choiceg:
             if "stick" in game.inventorys:
                 print("You try to pry at the bars with the stick, but the stick is too thin and breaks before any bars are bent.")
