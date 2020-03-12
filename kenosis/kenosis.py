@@ -184,7 +184,6 @@ class game:
     stick = 0
     necklace = 0
     matches = 3
-
     cansee = 0
       # Inventory
     #def inventory():
@@ -408,12 +407,17 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
          if 'where' in choiceg:
              game.l1game()
          if 'look all' in choiceg:
-             if cansee <= 0:
+             if game.cansee == 0:
                 print("You feel around on the ground. You feel a few objects on the ground but it's too dark to know what they are, they feel like a stick, a matchbox and a necklace.")
+                time.sleep()
+                game.logic()
              elif cansee == 1:
                  print("You see some of the room around you. It's dark, but you can see the faint outline of a few objects on the ground.")
                  time.sleep(1)
                  print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
+                 game.logic()
+             else:
+                game.logic()
 
          if "look necklace" in choiceg:
             print(game.necklace)
