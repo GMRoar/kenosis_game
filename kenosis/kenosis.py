@@ -450,7 +450,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 game.logic()
 
         if "pick-up spoon" in choiceg:
-            if "spoon" not in inventorys:
+            if "spoon" not in game.inventorys:
                 print(game.spoon)
                 print("You pick up the spoon, and put it in your pocket.")
                 game.inventorys.append("spoon")
