@@ -74,6 +74,53 @@ class tutorial:
     def lookwindow():
         print("You look out the window. It's pitch black, you can't see anything.")
         tutorial.tutorialroom()
+    def pickupwindow():
+        print("You can't pick-up the window.")
+        time.sleep(2)
+        tutorial.tutorialroom()
+    def pickupchair():
+        print("You try to pick-up the chair. You are weak, and it is too heavy.")
+        time.sleep(2)
+        tutorial.tutorialroom()
+    def pickuptable():
+        print("You try to pick-up the table. You are weak, and it is too heavy.")
+        time.sleep(2)
+        tutorial.tutorialroom()
+    def pickupchair():
+        print("You try to pick-up the chair. You are weak, and it is too heavy.")
+        time.sleep(2)
+        tutorial.tutorialroom()
+    def usechair():
+        print("You try to sit down on the chair. You are too heavy for the rotted chair, and it creaks under your weight. You feel it flexing, and decide to get back up.")
+        time.sleep(2)
+        tutorial.tutorialroom()
+    def usetable():
+        print("You try to sit on the table. It creaks, and warps the rotting wood. You decide to get back up.")
+        time.sleep(2)
+    def pickupsign():
+        print("You try to pick-up the sign, but your weak ginger arms cannot muster the strength to pick it up. You give up.")
+        time.sleep(2)
+        tutorial.tutorialroom()
+        tutorial.tutorialroom()
+    def usewindow():
+        print("You manage to open the window, and climb outside. You hear whispers in your head. All you can hear is the word Craig.")
+        time.sleep(1)
+        print("Craig.")
+        print("Craig. Craig. Craig. Craig. Craig. Craig. Craig. Craig.")
+        print("Craig.")
+        print("Craig.")
+        print("Craig.")
+        print(game.crag)
+        print("Craig. Craig. Craig. Craig. Craig. Craig. Craig. Craig. Craig. Craig. Craig. Craig. Craig. ")
+        print("Craig. Craig. Craig. Craig. Craig. .giarCCraig. Craig. Craig. Craig. Craig. .giarC")
+        print("Craig.")
+        print("Craig.")
+        print("Craig.")
+        print("Craig.")
+        print("Craig.")
+        print("You die.")
+        time.sleep(2)
+        tutorial.tutorialintro()
     # Pick-up commands.
     def pickupcoins():
         if tutorial.pickupcoinsused == 0:
@@ -163,6 +210,28 @@ class tutorial:
             tutorial.where()
         if 'end tutorial' in choice:
             tutorial.endtutorial()
+        if 'use table' in choice:
+            tutorial.usetable()
+        if 'use chair' in choice:
+            tutorial.usechair()
+        if 'use window' in choice:
+            tutorial.usewindow()
+        if 'pick-up table' in choice:
+            tutorial.pickuptable()
+        if 'pick-up chair' in choice:
+            tutorial.pickupchair()
+        if 'pick-up window' in choice:
+            tutorial.pickupwindow()
+        if 'pick-up sign' in choice:
+            tutorial.pickupsign()
+        if 'pickup sign' in choice:
+            tutorial.pickupsign()
+        if 'pickup table' in choice:
+            tutorial.pickuptable()
+        if 'pickup chair' in choice:
+            tutorial.pickupchair()
+        if 'pickup window' in choice:
+            tutorial.pickupwindow()
         else:
             print("I didn't understand what you meant. Try again.")
             tutorial.tutorialroom()
@@ -179,7 +248,7 @@ class game:
             game.logic()
     #Progression Variables
     inventorys = []
-    spoonlock = 0
+    spoonlock = 1
     spoon = 0
     stick = 0
     necklace = 0
@@ -210,6 +279,40 @@ class game:
     
     
     #Art
+    crag = """
+    ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,********************
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,**************
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,***********
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,**,,***
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,....,,/(*&&%&*,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,.,../#%#(##%%&%&&&%&&&%(*,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,###%#%%%%&&&&&&&&&&&&&&&%,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,*((#&&&%/*//(#(///((#&@&&%%%*,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,...,..,,,,,,,,,.,,*//#%&#*,,******//////((&@@@&#/,,,,,,,,,,,,,,,,,,,,,,,,
+.......,,,,,.,,,,.......,,*((#(***********////////%%%&%(,,,,,,,,,,,,,,,,,,,,,,,,
+..........................,#%(************/////////%%%%(,,,,,,,,,,,,,,,,,,,,,,,,
+...................,....,,,,,/*****/*****///*//***//#%%/,,,,,,,,,,,,,,,,,,,,,,,,
+..........................,,*/*//((((////((((////////#(#,,,,,,,,,,,,,,,,,,,,,,,,
+...........................,/(**(#%OO(**/((((((OO////((#,,,,,,,,,,,,,,,,,,,,,,,,
+............................./****//****//////////**/#*(,,,,,,,,,,,,,,,,,,,,,,,,
+.............................*****//(**/////#((///////(,,,,,,,,,,,,,,,,,,,,,,,,,
+...............................*/((((/(###(((##((////,,,,,,,,,,,,,,,,,,,,,,,,...
+...............................**//(/((#(##%&#/(////*,.,,,,,,,,,,,,,,,,,,,,,,,,.
+................................***///////((////////..,,,,,,,,,,,,,,,,,,,,,,,,,.
+................................./****////////*////@@,,,,,,,,,,,,,,,,,,,,,,,,,,.
+...............................,&&*/***////////////@@&,,,,,,,,,,,,,,,,,,,,,,,,..
+.........................,,,(%%%&&%**/#%#####/////#@&&&%&#/,,,,.......,,,,,,,,,,
+.....................,((%(%%###&&&&(/*//((///////#&@&&&%%%%&%%%%#,........,,,,,,
+..............,#######%%#%&####&%%%#%&#(((/////#%&@@&&&&&%%%&%%%%%%%##%#/,,.,,,,
+..............#####%%%#%#&%####%&&%%@@&&#((//((%&@@&&&&&%&%%%%%&%%%%%%%%##,,....
+............%%###%%%%%%%%%%#%##%%&&&&@@&&&((((#@@@&&&&&@&&%%%%%&&%%%%%%%%##,,...
+...........%&&#%%%%%%%%%%%%%%%%%%&&&%&@@&&&##@@@&%&&&&%&&&%%%%%&&&%%%%%%%%@%,,..
+.........#%&&&#%%#%%%%%%%%%%%%%%%%&&&%%&@&&&@@@&&&%&&%%&&&%%%%%&&&%%%%%%%%@&%,,,
+........%%&&&&#%%##%%%%%%%%%%%%%%%&&&&%&&&&&@@&&&%%&&%%&&&%%%%%%%&%%%%%%%%@@&%%,
+.......%&&@&&&#%%%%%%%%%%%%%%%%%%%&&&&%%@&&&&@&&&&&&&&&&&&%%%%%%&%%%%%%%%%@@&&&&
+......%&&&@@&&#%%#%%%%%%%%%%%%%%%%%&&&&%%&&&&@&&%%&%&%%%%%%%%%%%&%%%%%%%%%@@&&&&
+"""
     necklace = """
    
 WW:WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW@:WWW
@@ -291,7 +394,37 @@ WWWWWWWWWWWWWWWWWW*+:-.............*WWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
     """
-
+    matchbox = """
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ .,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.  @@%    ,&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   @@@@@@@@@@@@@     @@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@     @@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@/  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@(   (@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@(  /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  / (@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#  @@@  @@@@@@@@@
+@@@@@@@@@@@@@@@@@@%  &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@  @@@@@@@@@
+@@@@@@@@@@@@@@@%  #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%  @@@@@@@%  @@@@@@@@@
+@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@@
+@@@@@@@@@@@  @@@  @@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@  ,@@@@@@@   @@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@        @@    @@@@@@@@@@@@@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@  (@  @@@     @   (@@@@@@@@@@@@@   @@@@@@@@  @@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@  @@  @@    @@@@@@@        @@@@@@  @@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@  &@@@@,  @@@@@&   ,@@@@@@@@&       @@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@   @@@@   @@@@@@@@@@@, *     @@@@@@@@% .@@@@,  @@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@   @@@@@@@@@@@@  @@@@  @@    @@@@@  ,   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@(   %@@@@@  @@@(  @@@&  @@@(   @, @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@%   %@@@@&  @@@@  @@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@     @@@@  @@@@(  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@   @@@@@  (@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*   *@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"""
     #Defines use commands
     # use stick all uses
     def usestickall():
@@ -299,7 +432,6 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             if "stick" in game.inventorys:
                 print("You try to pry at the bars with the stick, but the stick is too thin and breaks before any bars are bent.")
                 time.sleep(2)
-                game.inventorys.remove("stick")
                 game.logic()
             else:
                 print("You do not have a stick.")
@@ -318,7 +450,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
            if "stick" in game.inventorys: 
             if "matchbox" in game.inventorys:
                 print("You try to light the stick on fire, and it works. You see some of the room around you.")
-                cansee = 1
+                game.cansee = game.cansee + 1
                 time.sleep(2)
                 game.logic()
             else: 
@@ -332,9 +464,9 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
 # use spoon logics
     def usespoonall():
-        if "use spoon lock" in game.logic.choice:
+        if "use spoon lock" in choiceg:
             game.canuselock()
-        if "use spoon bars" in game.logic.choice:
+        if "use spoon bars" in choiceg:
             if 'spoon' in game.inventorys:
                 print("You try to pry at the bars with the spoon, but it is too small to do anything with. You give up.")
                 time.sleep(2)
@@ -344,7 +476,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 time.sleep(2)
                 game.logic()
 
-        if "use spoon matchbox" in game.logic.choice:
+        if "use spoon matchbox" in choiceg:
             if game.matches >= 1:
                 print("You heat up the spoon. Now you have a hot spoon. It does nothing.")
                 matches = game.matches - 1
@@ -355,7 +487,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 time.sleep(2)
                 game.logic()
     def canuselock():
-        if game.spoonlock == 0:
+        if game.spoonlock == 1:
             game.usespoonlogic()
         else:
             print("You have already picked the lock.")
@@ -387,20 +519,19 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
 
 
-    def usenecklacelock():
-         print("You try to pick the lock with the crucifix on the end of the necklace, no luck.")
-         if "necklace" in choice:
-             store.usenecklace()
     #Defines look commands
     def lookall():
          if 'where' in choiceg:
              game.l1game()
+         if 'look crag' in choiceg:
+            print(game.crag)
+            game.logic()
          if 'look all' in choiceg:
              if game.cansee == 0:
                 print("You feel around on the ground. You feel a few objects on the ground but it's too dark to know what they are, they feel like a stick, a matchbox and a necklace.")
-                time.sleep()
+                time.sleep(1)
                 game.logic()
-             elif cansee == 1:
+             elif game.cansee == 1:
                  print("You see some of the room around you. It's dark, but you can see the faint outline of a few objects on the ground.")
                  time.sleep(1)
                  print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
@@ -451,8 +582,8 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
         if "pick-up matchbox" in choiceg:
             if "matchbox" not in game.inventorys:
-                print("art")
-                print("You pick up the matchbox, and put it in your pocket.")
+                print(game.matchbox)
+                print("You pick up the matchbox, and have a look inside. The matchbox only has 3 matches, and the striking surface seems worn.")
                 game.inventorys.append("matchbox")
                 game.logic()
             else:
@@ -461,7 +592,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 game.logic()
 
         if "pick-up necklace" in choiceg:
-            if "necklace" not in choiceg:
+            if "necklace" not in game.inventorys:
                 print(game.necklace)
                 print("You pick up a necklace, and place it around your neck.")
                 game.inventorys.append("necklace")
@@ -486,21 +617,28 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         time.sleep(2)
         if game.cansee == 0:
             print("You can't see anything.")
+            print("You run your hand across the ground and find a stick, a necklace and a matchbox.")
         elif cansee == 1:
             print("You see some of the area around you. It's dark, but you can see the faint outline of trees, as well as a few objects on the ground.")
             print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
 
         elif cansee == 2:
-            print(game.cansee2) 
+            print(game.cansee) 
         time.sleep(2)
         game.logic()
     
-        
 
     def logic():
         global choiceg
         choice = input(">> ")
         choiceg = choice
+        if 'crag' in choice:
+            print(game.crag)
+            game.logic()
+        if 'look crag' in choice:
+            game.lookall()
+        if 'exit' in choice:
+            game.exit()
         if 'look all' in choice:
             game.lookall()
         if 'look necklace' in choice:
@@ -513,6 +651,12 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             game.pickupall()
         if 'pick-up spoon' in choice:
             game.pickupall()
+        if 'look spoon' in choice:
+            game.lookall()
+        if 'look necklace' in choice:
+            game.lookall()
+        if 'look matchbox' in choice:
+            game.lookall()
         if 'pick-up necklace' in choice:
             game.pickupall()
         if 'pick-up matchbox' in choice:
@@ -520,7 +664,10 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         if 'use stick' in choice:
             game.usestickall()
         if 'use spoon' in choice:
-            game.usespoonall()        
+            game.usespoonall()   
+        if 'pickup' in choice:
+            print('look, i know you are testing this. just dont.') 
+            game.logic()    
         else:
             print("I didn't understand what you meant. Try again.")
             game.logic()
@@ -547,7 +694,7 @@ setup.startup()
 - KO
 - Wake up in church hung upside down amongst the bodybags
 - Use necklace to cut rope that you're being hung by - Give option to pick up rope
-- Sneak out of church, avoiding the WEIRDOS - official name btw "WEIRDOS"
+- Sneak out of church, avoiding the crag - official name btw "WEIRDOS"
 - Find beheading axe out back of church - pick that shit up fam
 - Hear people yelling and screaming 
 - Door behind you opens
