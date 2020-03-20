@@ -1,6 +1,7 @@
+#imports the time library for time.sleep
 import time
 class setup:
-    
+    #This is the start-up intro. It displays the intro text and checks whether or not the user would like to play the intro, then inits the game/tutorial.
     def startup():
         startupe = """
          _        _______  _        _______  _______ _________ _______ 
@@ -13,39 +14,38 @@ class setup:
         |_/    \/(_______/|/    )_)(_______)\_______)\_______/\_______)
 
         (C) Nathanial Landers & Leyton Frecklington 2020
-        Ver. 0.0.6b
         """
         print(startupe)
         print("Would you like to play the tutorial (Recommended)? (Y/N)")
         playTutorial = input(">> ")
-        if 'y' in playTutorial:
-            tutorial.tutorialintro()
-        if 'Y' in playTutorial:
+        if playTutorial == 'y' or playTutorial == 'Y' or playTutorial == 'yea' or playTutorial == 'yes':
             tutorial.tutorialintro()
         else:
             game.l1game()
-
+#Class that contains all of the tutorial including logic and intro. Also includes the specific exit command for this section, as the N result will change.
 class tutorial:
+    #This is an exit command. It closes the game, or continues the game depending on a Y/N answer.
     def exitt():
             print("Are you sure? (Y/N)")
             exit = input(">>> ")
-            if exit == 'Y':
-                exit()
-            elif exit == 'y':
+            if exit == 'Y' or exit == 'y' or exit == 'yes' or exit == 'yea':
                 exit()
             else:
                 tutorial.tutorialroom()
-    #Variables required for inventory.
+    #Variables required for inventory. This is improved later in the game class, but for only one item in this level, it is sufficient.
     coins = 0
     pickupcoinsused = 0
     
-    # Look commands.
+    # All of the commands used in the tutorial sequence. this is improved and simplified into one definition later in the game class.
+    #self explantory, ends the tutorial and loads the actual game.
     def endtutorial():
         print("Starting Kenosis...")
         time.sleep(2)
         game.l1game()
+    #reprints the intro. Does not reset the game.
     def where():
         tutorial.tutorialintro()
+    #use coins, checks if in inv or if used
     def usecoins():
         if tutorial.coins == 1:
             print("You throw the coins across the room.")
@@ -56,6 +56,7 @@ class tutorial:
             print("You don't have coins.")
         time.sleep(2)
         tutorial.tutorialroom()
+    # look's are self explantory, prints info, waits, calls for the input & processing again.
     def looksign():
         print("You look at the sign. The sign reads: 'Tutorial'.")
         time.sleep(2)
@@ -103,6 +104,7 @@ class tutorial:
         time.sleep(2)
         tutorial.tutorialroom()
         tutorial.tutorialroom()
+        #easter egg lol
     def usewindow():
         print("You manage to open the window, and climb outside. You hear whispers in your head. All you can hear is the word Craig.")
         time.sleep(1)
@@ -122,10 +124,14 @@ class tutorial:
         print("You die.")
         time.sleep(2)
         tutorial.tutorialintro()
+    #improvements added later
     def lookcoins():
         print("You look at the coins. They are Australian 20 cent coins.")
         time.sleep(2)
-        tutorial.tutorialintro()
+        tutorial.tutorialroom()
+    def usesign():
+        print("You try and use the sign. You see a note under it: use the window.")
+        tutorial.tutorialroom()
     # Pick-up commands.
     def pickupcoins():
         if tutorial.pickupcoinsused == 0:
@@ -136,8 +142,6 @@ class tutorial:
         else:
             print("You already have the coins.")
             tutorial.tutorialroom()
-
-    #Use commands.
 
 
 
@@ -187,16 +191,21 @@ class tutorial:
             print("Try any of these commands in this tutorial sequence. When you are finished, type 'end tutorial'.")
             print("")
             tutorial.tutorialroom()       
-
-
-
+# NOTE  : : : : : : : : : 
+# we improved on the calling for different commands later. Since this sequence isn't very complex, we decided to keep this logic the same. For a better example, please see the game() class.
+# :)
+# NOTE  : : : : : : : : :
     
     def tutorialroom():
         #var
         choice = input(">> ")
         #game routine
+        if 'exit' in choice:
+            tutorial.exitt()
         if 'look sign' in choice:
             tutorial.looksign()
+        if 'use sign' in choice:
+            tutorial.usesign()
         if 'look coins' in choice:
             tutorial.lookcoins()
         if 'look chair' in choice:
@@ -253,7 +262,7 @@ class game:
             exit()
         else:
             game.logic()
-    #Progression Variables
+    #Progression Variables + Unused variables that might be used later
     inventorys = []
     spoonlock = 1
     spoon = 0
@@ -261,20 +270,10 @@ class game:
     necklace = 0
     matches = 3
     cansee = 0
-      # Inventory
-    #def inventory():
-       #  for key, value in game.inventorys.items():
-       #     if value == 1:
-       #         print("You check your pockets, and find:", key)
-       #         time.sleep(1)
-       #         game.logic()
-       #     if value != 1:
-      ##          print("You find nothing in your pockets.")
-       #         time.sleep(1)
-       #         game.logic()
-
+# inventory
     def inventory():
-        print("You check your pockets, and find:", game.inventorys[::1])
+        print("You check your pockets, and find:")
+        print(*game.inventorys, sep = ", ")
         game.logic()
         
        
@@ -431,6 +430,177 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+"""
+    axe = """
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@                                                             @@@@@@@@@@@@@@@@@
+@@                                                               @@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#(        @@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@             @@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@               #*@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/*                      @@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/ /                         %@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@&&&&&&&&&&&&&&&&&&@@@@@@@@@@@@ @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @/                                      /@ @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@ @@@@@@@ @@@@@@  #@@@ @@@@ @@@@@*@@@ @@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@   .@@@@@@@. @@@@@@  @@@/@@@@@@@@@@*@@ @@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@ ,@@@@@@ @@@@@@@(*@@@@ @@@@@@/@@@@@@ @@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                                             @@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    
+"""
+    keys = """
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%% %@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@%@ @@@@@@@@@      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@     @ @@@@ @@@@   @@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@    @@@@((&  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@# @@@@@@@@@@@@@@@ @@@@@@@@@@@@@. @@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@( %@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@% (@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@% @@@@@@@@@@@@@@@@@
+@@@@@@@@@. @@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@% @@@@@@@@@@@@@@
+@@@@@@( @@ @@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@, @@@@@@@@@@@
+@@@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@   @ @@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   #@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@   &@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@(@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"""
+    rope = """
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,            (%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,                (@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@@@@@##%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.                     ,@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%                       @@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@&/.       .*(&&&&&&@@@@@@@@@     (@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@,                                 &@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@    .@@@@@@@@@((((((             @@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@%    .%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@                                    ...*&@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@(                                      @@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#    @@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@*,,(###########################(,            @@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@*                                          *&@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@(      (((((((((((((((((((((((((((((((@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@.    .((#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@(                                                      (@@@@@@@@@@@@
+@@@@@@@@@@@@     @@@@(((/                                          @@@@@@@@@@@@@
+@@@@@@@@@@@@.                ((@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@((                                                        @@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@(((((((((((((((((((((((((((((((((((((((,    %@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&     %@@@@@
+@@@@@@@@@(                        .((((((#@@@@@@@@@@@@@@@@@              @@@@@@@
+@@@@@@@@@@@(((((((((((((                                           *(@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/               .(%@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"""
+    lockpick = """
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@&           /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@,               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@                    &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@(                      *@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@                       ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@                       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@                       .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@                       *@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@%                       &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@&                       (@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@                        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@%                        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@                         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@&                        ,@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                         @@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                      @@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                   @@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 ,@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      %@@@@/       @@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&@@@@@@@@@@@/      @@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          &@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.          .@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        @@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"""
+    knife = """
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@.            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@                   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@*                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@&                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@                    %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    %@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    @@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    @@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    @@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,                   #@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    @@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 @@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.                @@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @          @@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@          @@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,     &@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"""
+    bandages = """
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@                              @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@                             #  #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@                             @   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@ &@ @ @@@ @@#@,@ @.          @   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@ &@ @ @ @.@/@@,@ @.          @   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@ %@@/.@ @@@*@@,@@(           @   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@                             @   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@  @@%/@ @%@@*@@              @   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@ &@@@/@ @%@@ @               @   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@ @@.@/@ @@@.@@@              @   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@                             *   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@                                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@                                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@                                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 """
     #Defines use commands
     # use stick all uses
@@ -471,7 +641,13 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
 # use spoon logics
     def usespoonall():
+        if "use spoon on lock" in choiceg:
+            game.canuselock()
         if "use spoon lock" in choiceg:
+            game.canuselock()
+        if "use spoon in lock" in choiceg:
+            game.canuselock()
+        if "use spoon at lock" in choiceg:
             game.canuselock()
         if "use spoon bars" in choiceg:
             if 'spoon' in game.inventorys:
@@ -598,7 +774,6 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 print("You already have a matchbox.")
                 time.sleep(2)
                 game.logic()
-
         if "pick-up necklace" in choiceg:
             if "necklace" not in game.inventorys:
                 print(game.necklace)
@@ -614,8 +789,15 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         game.inventorys.append("matchbox")
         game.logic()
 
-        
+    def usenecklace():
+        print(game.necklace)
+        print("You can't think of a use for your necklace.")
+        game.logic()    
 
+    def usematchbox()
+            print(game.matchbox)
+            print("You don't want to waste any matches.")
+            game.logic()
     # Game intro
     def l1game():
         #plain text for an introduction to the scene, used for cansee = 0
@@ -677,6 +859,10 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             game.usestickall()
         if 'use spoon' in choice:
             game.usespoonall()   
+        if 'use necklace' in choice:
+            game.usenecklace()
+        if 'use matchbox' in choice:
+            game.usematchbox()
         if 'pickup' in choice:
             print('look, i know you are testing this. just dont.') 
             game.logic()    
@@ -687,7 +873,6 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 class l2game:
     def l2game():
         print("churchnigga")
-class Game:
 
     time.sleep(2)
 setup.startup()
@@ -699,35 +884,37 @@ setup.startup()
 - Walk around woods - lots of cereal(crunchy) leaves
 - Hear noises (possibly running footsteps(creating more cereal noises) or growls)
 - Find abandoned church
-- Explore church - find lockpicks, keys, letters that you can read
+- Explore church - find lockpicks, keys, knife.
 - Find bodybags
+- Hear keys jingling, somebody trying to unlock a door
 - Try run from church
-- Hit tree
+- Trip on a divot, and fall into a trap
 - KO
 - Wake up in church hung upside down amongst the bodybags
-- Use necklace to cut rope that you're being hung by - Give option to pick up rope
+- Use knife to cut rope that you're being hung by - Give option to pick up rope
 - Sneak out of church, avoiding the CRAG - official name btw "CRAG"
 - Find beheading axe out back of church - pick that shit up fam
 - Hear people yelling and screaming 
 - Door behind you opens
 - Piss bolt out of church - give player options to hide (behind a tree, nearby shed, river bank etc.)
-    - Behind tree doesn't work, forced to find somewhere else 
-    - Cut self on something in shed, have to find something to stop the bleeding
-    - Completely safe on river bank
+    - Time based - countdown
+        - Behind tree doesn't work, forced to find somewhere else 
+        - Cut self on something in shed, have to find something to stop the bleeding
+        - Completely safe on river bank
 - Find a nearby outhouse, maybe they have something to stop bleeding - or to pick up
 - Enter outhouse
 - Completely empty
-- Go outside to find CRAGS with lanterns walking around
+- Go outside and find CRAGS with lanterns walking around
 - Stay in outhouse for a while
 - Find a basement
 - Enter basement
-- Find shit tonnes of supplies, including bandages (3x), but cut self on way down forcing to use 2 of 3 bandages to stop bleeding
+- Find shit tonnes of supplies, including a bandage, but cut self on way down forcing to use 2 bandages if already cut from shed.
+    - You don't have 2 bandages retard
 - Other supplies include:
     - Fire for warmth
     - Food
     - Water
     - A bed
-    - More letters / diary entries
 - Sleep in basement for night
 - Wake up to CRAGS taking you somewhere, you're completely stripped bare, they took everything 
 - You can choose to:
@@ -743,14 +930,35 @@ setup.startup()
 - Try to run out of church, works, but they end up catching you
 - Try to run again and find the cage where you initially woke up
 - Daylight breaks (coincidence amirite)
-- You see a switch, wasn't there before
-- Give choice of flicking switch
-    - If yes: clear all text (if you can do that) and end game 
-    - If no: clear all text (again, if you can do that) and restart game, forcing player to go through it all to complete
+- If bandage used - die
+- If not: 
+    - You see a switch, couldn't see it before
+    - Give choice of flicking switch
+        - If yes: clear all text (if you can do that) and end game 
+        - If no: clear all text (again, if you can do that) and restart game, forcing player to go through it all to complete
 
-    If yes: give achievement: The easy way out
-    If no: give achievement: A real competitor-
+If yes: give achievement: The easy way out
+If no: give achievement: A real competitor
+
+Scroll credits
 
 The end :)
+"""
+
+#items needed for level 2
+"""
+Items:
+- Axe
+- Rope
+- Lockpick
+- Keys
+- Bandage
+- Knife
+
+Options for hiding:
+- Behind tree - They find you, forcing you to hide elsewhere
+- Behind nearby shed - Works, but you cut yourself trying to hide, forcing you to use a bandage 
+- Nearby river bank - best option
+
 """
 #make sure to give more options to pick stuff up during rest of story.
