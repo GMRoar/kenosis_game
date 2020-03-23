@@ -14,6 +14,8 @@ class setup:
         |_/    \/(_______/|/    )_)(_______)\_______)\_______/\_______)
 
         (C) Nathanial Landers & Leyton Frecklington 2020
+
+        Version: 0.07a
         """
         print(startupe)
         print("Would you like to play the tutorial (Recommended)? (Y/N)")
@@ -168,6 +170,7 @@ class tutorial:
             print("")
             time.sleep(3)
             print("These commands are: look, pick-up, where, inventory.")
+            print("You can also use hint if you are stuck.")
             print("")
             time.sleep(3)
             print("The 'look' command let's you look at an object, or all objects. First try 'look all' to list all objects in a room, then 'look (obj)' to inspect it.")
@@ -248,6 +251,9 @@ class tutorial:
             tutorial.pickupchair()
         if 'pickup window' in choice:
             tutorial.pickupwindow()
+        if 'hint' in choice:
+            print("There are no hints in the tutorial. Feel free to end it at any time with 'end tutorial'.")
+            tutorial.tutorialroom()
         else:
             print("I didn't understand what you meant. Try again.")
             tutorial.tutorialroom()
@@ -614,7 +620,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 print("You do not have a stick.")
                 time.sleep(2)
                 game.logic()
-        elif "use stick lock" in choiceg:
+        elif "use stick lock" or "use lock stick" in choiceg:
             if "stick" in game.inventorys:
                 print("You try to pick the lock with the stick, but the stick is too thick and can't fit in the lock mechanism.")
                 time.sleep(2)
@@ -685,13 +691,13 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             if game.spoonlock == 1:
                 print("You use the spoon on the lock. With a bit of time, you manage to pick the lock.")
                 print("")
+                print("You step out of the cage, and out into the forest.")
                 time.sleep(2)
                 game.spoonlock == 0
-                game.logic()
+                l2game.logic()
+                
             else:
-                print("You have already unlocked the gate.")
-                time.sleep(2)
-                game.logic()
+               l2game.logic()
         else:
             print("You do not have a spoon.")
             time.sleep(2)
@@ -702,7 +708,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
 
 
-    #Defines look commands
+    #Defines look commands & outputs
     def lookall():
          if 'where' in choiceg:
              game.l1game()
@@ -721,6 +727,15 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                  print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
                  game.logic()
              else:
+                game.logic()
+         if 'look lock' in choiceg:
+             if game.spoonlock == 1:
+                print(game.lock)
+                print("You look at the lock on the gate. You think you could pick the lock if you had something to do it with.")
+                game.logic()
+             else:
+                print(game.lock)
+                print('You see a unlocked padlock hanging off the gate.')
                 game.logic()
 
          if "look necklace" in choiceg:
@@ -794,9 +809,13 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         print("You can't think of a use for your necklace.")
         game.logic()    
 
-    def usematchbox()
+    def usematchbox():
+        if 'matchbox' in game.inventorys:
             print(game.matchbox)
             print("You don't want to waste any matches.")
+            game.logic()
+        else:
+            print('You do not have a matchbox')
             game.logic()
     # Game intro
     def l1game():
@@ -815,6 +834,8 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             print("You see some of the area around you. It's dark, but you can see the faint outline of trees, as well as a few objects on the ground.")
             print('')
             print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
+            print('')
+            print("You also see a lock hanging off the cage. If you could open it, you might be able to escape this forest.")
 
         elif cansee == 2:
             print(game.cansee) 
@@ -869,12 +890,56 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         else:
             print("I didn't understand what you meant. Try again.")
             game.logic()
+"""
+ ____     ___  __ __  ______      _        ___ __ __    ___  _         
+|    \   /  _]|  |  ||      |    | |      /  _]  |  |  /  _]| |        
+|  _  | /  [_ |  |  ||      |    | |     /  [_|  |  | /  [_ | |        
+|  |  ||    _]|_   _||_|  |_|    | |___ |    _]  |  ||    _]| |___     
+|  |  ||   [_ |     |  |  |      |     ||   [_|  :  ||   [_ |     |    
+|  |  ||     ||  |  |  |  |      |     ||     |\   / |     ||     |    
+|__|__||_____||__|__|  |__|      |_____||_____| \_/  |_____||_____|    
+                                                                       
 
+"""
 class l2game:
-    def l2game():
-        print("churchnigga")
+    def exit():
+        print("Are you sure? (Y/N)")
+        inputa = input('>>> ')
+        if 'y' or 'Y' or 'yes' in inputa:
+            exit()
+        else:
+            l2game.logic()
+    def l2gameintro():
+        print("As you step out onto the soft ground, the dry leaves crunch under your feet.")
+        print('')
+        time.sleep(1)
+        print("You hear the faint crunching of the leaves in the distance, coming closer to you.")
+        print('')
+        time.sleep(1)
+        print("You know that this is not going to end well. You decide to run.")
+        print('')
+        time.sleep(1)
+        print("You run until you find a building. You decide that going inside is probably safer than being outside with whatever is chasing you.")
+        print('')
+        time.sleep(1)
+        print("You can't see much except for a lantern hanging from the corner of the room.")
+        l2game.logic()
 
+
+    def logic():
+        choice = input(">> ")
+        if 'crag' in choice:
+            print(game.crag)
+            l2game.logic()
+        if 'look crag' in choice:
+            l2game.lookall()
+        if 'exit' in choice:
+            l2game.exit()
+        else:
+            print("I didn't understand what you meant. Try again.")
+            game.logic()
     time.sleep(2)
+
 setup.startup()
 
 """
