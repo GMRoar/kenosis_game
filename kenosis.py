@@ -1,5 +1,6 @@
 #imports the time library for time.sleep
 import time
+import os
 class setup:
     #This is the start-up intro. It displays the intro text and checks whether or not the user would like to play the intro, then inits the game/tutorial.
     def startup():
@@ -22,6 +23,8 @@ class setup:
         playTutorial = input(">> ")
         if playTutorial == 'y' or playTutorial == 'Y' or playTutorial == 'yea' or playTutorial == 'yes':
             tutorial.tutorialintro()
+        elif 'skip game to l2' in playTutorial:
+            l2game.l2gameintro()
         else:
             game.l1game()
 #Class that contains all of the tutorial including logic and intro. Also includes the specific exit command for this section, as the N result will change.
@@ -53,6 +56,7 @@ class tutorial:
             print("You throw the coins across the room.")
             tutorial.coins = 0
             tutorial.pickupcoinsused = 0
+            time.sleep(2)
             tutorial.tutorialroom()
         else:
             print("You don't have coins.")
@@ -73,10 +77,11 @@ class tutorial:
         tutorial.tutorialroom()
     def looktable():
         print("You inspect the table. It's just a wooden table. It's starting to decay from rot.")
-        time.sleep(1)
+        time.sleep(2)
         tutorial.tutorialroom()
     def lookwindow():
         print("You look out the window. It's pitch black, you can't see anything.")
+        time.sleep(2)
         tutorial.tutorialroom()
     def pickupwindow():
         print("You can't pick-up the window.")
@@ -133,6 +138,7 @@ class tutorial:
         tutorial.tutorialroom()
     def usesign():
         print("You try and use the sign. You see a note under it: use the window.")
+        time.sleep(2)
         tutorial.tutorialroom()
     # Pick-up commands.
     def pickupcoins():
@@ -140,9 +146,11 @@ class tutorial:
             print("You pick-up the coins, and place them in your pocket.")
             tutorial.coins = 1
             tutorial.pickupcoinsused = 1
+            time.sleep(2)
             tutorial.tutorialroom()
         else:
             print("You already have the coins.")
+            time.sleep(2)
             tutorial.tutorialroom()
 
 
@@ -608,6 +616,94 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 """
+    door = """
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%,,                   ,,*&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@.      /@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@(     .@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@    ,@@ %@@@@@@@@@@@@@@@@@@@@@. @  @@@@@@@@@@@@@@@@@@@@@@@/    @@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@   @@@@@@@@/           %@@@@       @@@@/  ,@@@@@@@@@@@@@@@@@@@@@@@@@@*    *@@@@@@@@@@@@@@
+@@@@@@@/  @  @@@@@@@@@@@@@@@@@@@@@  .@@@@@@@@@@@@@@@@@@@@(         .@@@@@@@@@@@@@@@@@@@   @@@@@@@@@@
+@@@@&  @@  @@@@@@@    ./   @@@@@@@&@%   **      @@@@@@%  . &@@@@@@@@@@@@@@@@@ &@  @@@@@@@@  /@@@@@@@
+@@@  @@@&  @@@.  &@@@@@@@@@@*    @@@@@@@@@@@@@@@@@@@@@@@@@@  (,   @@@@@@@@@% %@@@@   ,##@@@@@  @@@@@
+@                                                                                                 &@
+@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@ ,@,@@ @@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@##@@@@ @,@@ %@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    """
+    lantern = """
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&    %@@@@@@@@@,  .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@ ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@& (@@@@@@@@@@@@@@@@@@@@@@@@# &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@ *@@@@@@@@@@@@@@@@@@@@@@@@@@@@, @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@/ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@ ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@ %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    *@@@@@@@@@@@@@@@@@@@%#  &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@, @@@@@@@@@@@@@@@@/ @/@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@ /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*     **,         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@. @@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@. @@@      *@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@          *&@@@@@@@@@@@@@@%  *@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@ .@@@@@@@@@@@@  @. @@@@@@@@@@( @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@( @@ @@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@     (@@@@@@@@@@@@  @, @@@@@@.   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@ &.  @@@@#.         &&      %@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@,  @@@@@@@@  @, .@@@@@@. , @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@ (@@@@@@@@@   @@@  @/ @@@@@@  @@& @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@% @ ##......                ,****, @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@, @@#  @@@@@@@@@@@      @@@@@@@@@% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@, @@@@@  .@@@@@@@*  @   #@@@@@@@@% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@& @@@@@@@@   &  *  @@@    @@@@@@@, @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@ (@@@@@@@     && @@@ ,@@@   @@@@, @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@ (@@@   @@@@@@@   @@ *@@@@@@  .@, @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@ (  .@@@@@@@@          @@@@@@@@&, @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@  (@@@@@@@@@@  @@@@@@@   %@@@@@@& @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@ (@@@@@@@@@% @@@@@@@@@@ &   @  &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@ (@    .#@& #@@@@@@@@@@ &@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@ *@@@@@@@@@(                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@@@@@@@@   .,%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@.  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@& @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@    ,@@@@@@@@@@@@@@@@@@@@@@@@@#/....  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    """
     #Defines use commands
     # use stick all uses
     def usestickall():
@@ -620,7 +716,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 print("You do not have a stick.")
                 time.sleep(2)
                 game.logic()
-        elif "use stick lock" or "use lock stick" in choiceg:
+        elif "use stick lock" in choiceg:
             if "stick" in game.inventorys:
                 print("You try to pick the lock with the stick, but the stick is too thick and can't fit in the lock mechanism.")
                 time.sleep(2)
@@ -691,10 +787,12 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             if game.spoonlock == 1:
                 print("You use the spoon on the lock. With a bit of time, you manage to pick the lock.")
                 print("")
+                time.sleep(1)
                 print("You step out of the cage, and out into the forest.")
-                time.sleep(2)
+                time.sleep(5)
                 game.spoonlock == 0
-                l2game.logic()
+                os.system('cls')
+                l2game.l2gameintro()
                 
             else:
                l2game.logic()
@@ -718,12 +816,15 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
          if 'look all' in choiceg:
              if game.cansee == 0:
                 print("You feel around on the ground. You feel a few objects on the ground but it's too dark to know what they are, they feel like a stick, a matchbox and a necklace.")
-                time.sleep(1)
+                time.sleep(2)
                 game.logic()
              elif game.cansee == 1:
                  print("You see some of the room around you. It's dark, but you can see the faint outline of a few objects on the ground.")
                  print('')
-                 time.sleep(1)
+                 time.sleep(2)
+                 print("Now that you have some light, you can see a lock on the gate in front of you. Maybe you could pick the lock with something?")
+                 print('')
+                 time.sleep(2)
                  print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
                  game.logic()
              else:
@@ -732,23 +833,28 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
              if game.spoonlock == 1:
                 print(game.lock)
                 print("You look at the lock on the gate. You think you could pick the lock if you had something to do it with.")
+                time.sleep(2)
                 game.logic()
              else:
                 print(game.lock)
                 print('You see a unlocked padlock hanging off the gate.')
+                time.sleep(2)
                 game.logic()
 
          if "look necklace" in choiceg:
             print(game.necklace)
             print("You look at the necklace. It is made of a thin, linked chain and a wooden crucifix hanging off it, one side of it appears to be sharper than the others.")
+            time.sleep(2)
             game.logic()
          if "look stick" in choiceg:
             print(game.stick)
             print("You look at the stick. It's a stick.")
+            time.sleep(2)
             game.logic()
          if "look matchbox" in choiceg:
             print(game.matchbox)
             print("You look at the matchbox, it contains 6 matches and the striking surface is worn down to almost nothing")
+            time.sleep(2)
             game.logic()
          if "look spoon" in choiceg:
              print(game.spoon)
@@ -773,6 +879,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 print(game.spoon)
                 print("You pick up the spoon, and put it in your pocket.")
                 game.inventorys.append("spoon")
+                time.sleep(2)
                 game.logic()
             else:
                 print("You already have a spoon.")
@@ -784,6 +891,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 print(game.matchbox)
                 print("You pick up the matchbox, and have a look inside. The matchbox only has 3 matches, and the striking surface seems worn.")
                 game.inventorys.append("matchbox")
+                time.sleep(2)
                 game.logic()
             else:
                 print("You already have a matchbox.")
@@ -794,29 +902,46 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 print(game.necklace)
                 print("You pick up a necklace, and place it around your neck.")
                 game.inventorys.append("necklace")
+                time.sleep(2)
                 game.logic()
             else:
                 print("You already have a necklace.")
+                time.sleep(2)
+                game.logic()
 
     def pickupmatchbox():
         print(game.matchbox)
         print("You pick up the matchbox, and have a look inside. The matchbox only has 3 matches, and the striking surface appears heavily used.")
         game.inventorys.append("matchbox")
+        time.sleep(2)
         game.logic()
 
     def usenecklace():
         print(game.necklace)
         print("You can't think of a use for your necklace.")
+        time.sleep(2)
         game.logic()    
 
     def usematchbox():
         if 'matchbox' in game.inventorys:
             print(game.matchbox)
             print("You don't want to waste any matches.")
+            time.sleep(2)
             game.logic()
         else:
             print('You do not have a matchbox')
+            time.sleep(2)
             game.logic()
+    def hint():
+        if cansee == 0:
+            print('If only there was a way to see more around me. I should get a matchbox, and a stick. Maybe I can use them together.')
+            time.sleep(2)
+            game.logic()
+        else:
+            print('Maybe I should pick that lock with something and get out of here...')
+            time.sleep(2)
+            game.logic()
+            
     # Game intro
     def l1game():
         #plain text for an introduction to the scene, used for cansee = 0
@@ -829,13 +954,17 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         if game.cansee == 0:
             print("You can't see anything.")
             print('')
+            time.sleep(2)
             print("You run your hand across the ground and find a stick, a necklace and a matchbox.")
         elif cansee == 1:
             print("You see some of the area around you. It's dark, but you can see the faint outline of trees, as well as a few objects on the ground.")
             print('')
+            time.sleep(2)
             print("You run your hand across the ground and find a stick, a spoon, a necklace and a matchbox.")
             print('')
+            time.sleep(2)
             print("You also see a lock hanging off the cage. If you could open it, you might be able to escape this forest.")
+            print('')
 
         elif cansee == 2:
             print(game.cansee) 
@@ -850,6 +979,10 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         if 'crag' in choice:
             print(game.crag)
             game.logic()
+        if 'hint' in choice:
+            game.hint()
+        if 'where' in choice:
+            game.lookall()
         if 'look crag' in choice:
             game.lookall()
         if 'exit' in choice:
@@ -902,6 +1035,9 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
 """
 class l2game:
+    #variables for storage
+    cansee = 0
+
     def exit():
         print("Are you sure? (Y/N)")
         inputa = input('>>> ')
@@ -909,30 +1045,96 @@ class l2game:
             exit()
         else:
             l2game.logic()
+
+
+    def lookcommands():
+        if 'look all' in choicel2:
+            print("You glance around, and you can't see much.")
+            if cansee == 0:
+                print("You see a lantern hanging in the corner of the room.")
+                l2game.logic()
+            elif cansee == 1:
+                print("You wave the lantern around the room. You see a pack of lockpicks, a ring of keys and a knife, sitting on a pew.")
+                time.sleep(1)
+                print("This must be a church.")
+                time.sleep(1)
+                print("You see a locked door behind the stage. Maybe you should go have a look?")
+                time.sleep(1)
+            elif cansee == 3:
+                print("yeet")
+                endl2()
+        if 'look lockpick' in choicel2:
+            print(game.lockpick)
+            print("You have an old fashioned lockpick. It's made out of cast iron, and should be good for a few uses.")
+            l2game.logic()
+        if 'look door' in choicel2:
+            print(game.door)
+            print("You pull on the handles of the door. It's locked. Maybe you could try and open it, only if you had something to open it with...")
+            l2game.logic()
+        if 'look lantern' in choicel2:
+            print(game.lantern)
+            print("You look at the lantern. It's a parrafin oil lantern, that is pretty dim.")
+            print("It looks like it will have enough oil to last a few hours.")
+            l2game.logic()
+    def pickupcommands():
+        if 'pick-up lockpick' in choicel2:
+            if 'lockpick' not in l2game.inventory:
+                print(game.lockpick)
+                print("You pick up the lockpicks, and put them in your pocket.")
+                l2game.inventory.append('lockpick')
+                l2game.logic()
+            if 'lockpick' in l2game.inventory:
+                print('You already have the lockpicks.')
+                l2game.logic()
+
+
+    inventory = ['matchbox', 'spoon', 'stick']
+    def inventory():
+        print("You check your pockets, and find:")
+        print(*l2game.inventory, sep = ", ")
+        l2game.logic()
+
+
     def l2gameintro():
+        print('')
         print("As you step out onto the soft ground, the dry leaves crunch under your feet.")
         print('')
-        time.sleep(1)
+        time.sleep(4)
         print("You hear the faint crunching of the leaves in the distance, coming closer to you.")
         print('')
-        time.sleep(1)
+        time.sleep(3)
         print("You know that this is not going to end well. You decide to run.")
         print('')
-        time.sleep(1)
+        time.sleep(3)
         print("You run until you find a building. You decide that going inside is probably safer than being outside with whatever is chasing you.")
         print('')
-        time.sleep(1)
+        time.sleep(3)
         print("You can't see much except for a lantern hanging from the corner of the room.")
         l2game.logic()
 
 
+
+    def endl2():
+        print('yeet')
+
+
     def logic():
         choice = input(">> ")
+        global choicel2
+        choicel2 = choice
+        if 'look all' in choice:
+            l2game.lookcommands()
+        if 'look lockpick' in choice:
+            l2game.lookcommands()
+        if 'look door' in choice:
+            l2game.lookcommands()
+        if 'look lantern' in choice:
+            l2game.lookcommands()
         if 'crag' in choice:
             print(game.crag)
             l2game.logic()
         if 'look crag' in choice:
-            l2game.lookall()
+            l2game.lookcommands()
         if 'exit' in choice:
             l2game.exit()
         else:
@@ -966,7 +1168,7 @@ setup.startup()
         - Behind tree doesn't work, forced to find somewhere else 
         - Cut self on something in shed, have to find something to stop the bleeding
         - Completely safe on river bank
-- Find a nearby outhouse, maybe they have something to stop bleeding - or to pick up
+- Find a nearby outhouse WITH A LOCK, maybe they have something to stop bleeding - or to pick up
 - Enter outhouse
 - Completely empty
 - Go outside and find CRAGS with lanterns walking around
