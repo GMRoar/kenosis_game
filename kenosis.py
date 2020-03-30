@@ -1122,7 +1122,7 @@ class l2game:
                 print("You look at the axe. It's a nice, steel axe. It's bloodstained.")
                 time.sleep(2)
                 l2game.logic()
-            if doorclosed == 1:
+            elif doorclosed == 1:
                 print("You don't see a axe.")
                 time.sleep(2)
                 l2game.logic()
@@ -1411,7 +1411,8 @@ class l2game:
             l2game.lookcommands()
         if 'look keys' in choice:
             l2game.lookcommands()
-        
+        if 'look axe' in choice:
+            l2game.lookcommands()
 
         #PICK-UP COMMANDS
         if 'pick-up lantern' in choice:
