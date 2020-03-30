@@ -1,6 +1,7 @@
 #imports the time library for time.sleep
 import time
 import os
+import random
 class setup:
     #This is the start-up intro. It displays the intro text and checks whether or not the user would like to play the intro, then inits the game/tutorial.
     def startup():
@@ -16,7 +17,7 @@ class setup:
 
         (C) Nathanial Landers & Leyton Frecklington 2020
 
-        Version: 0.07a
+        Version: 0.10b
         """
         print(startupe)
         print("Would you like to play the tutorial (Recommended)? (Y/N)")
@@ -44,6 +45,7 @@ class tutorial:
     # All of the commands used in the tutorial sequence. this is improved and simplified into one definition later in the game class.
     #self explantory, ends the tutorial and loads the actual game.
     def endtutorial():
+        os.system('cls')
         print("Starting Kenosis...")
         time.sleep(2)
         game.l1game()
@@ -1078,16 +1080,17 @@ class l2game:
         global cansee2
         if 'look all' in choicel2:
             print("You glance around, and you can't see much.")
+            time.sleep(2)
             if cansee2 == 0:
                 print("You see a lantern hanging in the corner of the room.")
                 l2game.logic()
             elif cansee2 == 1:
                 print("You wave the lantern around the room. You see a pack of lockpicks, a ring of keys and a knife, sitting on a pew.")
-                time.sleep(1)
+                time.sleep(2)
                 print("This must be a church.")
-                time.sleep(1)
+                time.sleep(2)
                 print("You see a locked door behind the stage. Maybe you should go have a look?")
-                time.sleep(1)
+                time.sleep(2)
                 l2game.logic()
             elif cansee == 3:
                 print("yeet")
@@ -1095,31 +1098,38 @@ class l2game:
         if 'look lockpick' in choicel2:
             print(game.lockpick)
             print("You have an old fashioned lockpick. It's made out of cast iron, and should be good for a few uses.")
+            time.sleep(2)
             l2game.logic()
         if 'look door' in choicel2:
             print(game.door)
             print("You pull on the handles of the door. It's locked. Maybe you could try and open it, only if you had something to open it with...")
+            time.sleep(2)
             l2game.logic()
         if 'look lantern' in choicel2:
             print(game.lantern)
             print("You look at the lantern. It's a parrafin oil lantern, that is pretty dim.")
+            time.sleep(2)
             print("It looks like it will have enough oil to last a few hours.")
             l2game.logic()
         if 'look rope' in choicel2:
             print(game.rope)
             print("You look at the rope. It's a standard rope")
+            time.sleep(2)
             l2game.logic()
         if 'look axe' in choicel2:
             if doorclosed == 0:
                 print(game.axe)
                 print("You look at the axe. It's a nice, steel axe. It's bloodstained.")
+                time.sleep(2)
                 l2game.logic()
             if doorclosed == 1:
                 print("You don't see a axe.")
+                time.sleep(2)
                 l2game.logic()
         if 'look keys' in choicel2:
             print(game.keys)
             print("You look at the keys. Looks like one could be used somewhere in this church.")
+            time.sleep(2)
             l2game.logic()
         if 'look knife' in choicel2:
             print(game.knife)
@@ -1129,7 +1139,20 @@ class l2game:
             print(game.bandage)
             print("You pick up the bandage. It appears to be 2 bandages balled up, this could be used for later")
             l2game.logic()
-        
+        if "look spoon" in choicel2:
+             print(game.spoon)
+             print("You look at the spoon. It could maybe be used to pick a lock.")
+             l2game.logic()        
+        if "look stick" in choicel2:
+            print(game.stick)
+            print("You look at the stick. It's a stick. It's burnt on the tip, but the flame has gone out. You throw the stick away.")
+            time.sleep(2)
+            l2game.logic()
+        if "look matchbox" in choicel2:
+            print(game.matchbox)
+            print("You look at the matchbox, it contains  matches and the striking surface is worn down to almost nothing")
+            time.sleep(2)
+            l2game.logic()
 
 
 
@@ -1174,7 +1197,7 @@ class l2game:
                     print(game.axe)
                     print("You pick-up the axe. You hang it over your back.")
                     l2game.inventorys.append('axe')
-                    l2game.logic()
+                    l2game.endl2()
                 if 'axe' in l2game.inventorys:
                     print("You already have the axe.")
                     l2game.logic()
@@ -1201,7 +1224,7 @@ class l2game:
                 l2game.logic()
 
     #USE COMMANDS
-    def useall():
+    def usecommands():
         if 'use lantern' in choicel2:
             if 'lantern' in l2game.inventorys:
                 print(game.lantern)
@@ -1210,6 +1233,21 @@ class l2game:
             else:
                 print("You don't have a lantern.")
                 l2game.logic()
+        if 'use keys door' in choicel2:
+            if 'keys' in l2game.inventorys:
+                print(game.keys)
+                print("You try the keys in the door. After a bit of wriggling, you manage to turn the lock. The door swings open.")
+                time.sleep(2)
+                print("You are immediately hit with a waft of rotting flesh. As you look inside the room, you see a body hanging from the roof, and a bloody axe in a wood block.")
+                global doorclosed
+                doorclosed = 0
+                global cansee2
+                cansee2 = 2
+                l2game.logic()
+            else:
+                print("You don't have any keys.")
+                l2game.logic()
+
         if 'use keys' in choicel2:
             if 'keys' in l2game.inventorys:
                 print(game.keys)
@@ -1218,24 +1256,77 @@ class l2game:
             else:
                 print("You don't have keys.")
                 l2game.logic()
-        if 'use keys door' in choicel2:
-            if 'keys' in l2game.inventorys:
-                print(game.keys)
-                print("You try the keys in the door. After a bit of wriggling, you manage to turn the lock. The door swings open.")
+        if 'use lockpick' in choicel2:
+            if 'lockpick' in l2game.inventorys:
+                print(game.lockpick)
+                print("You can't see anything you can use the lockpicks on.")
                 time.sleep(2)
-                print("You are immediately hit with a waft of rotting flesh. As you look inside the room, you see a body hanging from the roof, and an bloody axe in a wood block.")
-                global cansee2
-                cansee2 = 2
                 l2game.logic()
             else:
-                print("You don't have any keys.")
+                print("You don't have lockpicks.")
+        if 'use lockpick door' in choicel2:
+            if 'lockpick' in l2game.inventorys:
+                print(game.door)
+                print("You can't see any way to use the lockpick on this type of lock. You give up.")
+                time.sleep(2)
                 l2game.logic()
+            else:
+                print("You don't have a lockpick.")
+                l2game.logic()
+        if 'use knife' in choicel2:
+            if 'knife' in l2game.inventorys:
+                print(game.knife)
+                print("You can't think of any use for your knife. Though, you carve your name into the wooden fixtures with it.")
+                time.sleep(2)
+                l2game.logic()
+            else:
+                print("You don't have a knife.")
+                l2game.logic()
+        if 'use spoon' in choicel2:
+            if 'spoon' in l2game.inventorys:
+                print(game.spoon)
+                print("You can't think of a use for the spoon at the moment.")
+                l2game.logic()
+            else:
+                print("You don't have a spoon.")
+        if 'use stick' in choicel2:
+            if 'stick' in l2game.inventorys:
+                print(game.stick)
+                print("You can't think of a use for the burnt stick. You throw it away.")
+                l2game.logic()
+            else:
+                print("You don't have a stick.")
+        if 'use matchbox' in choicel2:
+            if 'matchbox' in game.inventorys:
+                print(game.matchbox)
+                print("You don't want to waste any matches.")
+                time.sleep(2)
+                l2game.logic()
+            else:
+                print('You do not have a matchbox')
+                time.sleep(2)
+                l2game.logic()
+        else:
+            print("I don't know what you want to use. Please try checking your input.")
+            l2game.logic()
     #INVENTORY
     inventorys = []
     def inventory():
         print("You check your pockets, and find: ")
         print(*l2game.inventorys, sep = ", ")
         l2game.logic()
+    #HINT SYSTEM
+    def hint():
+        global cansee2
+        if cansee2 == 0:
+            print("You should pick-up the lantern.")
+            l2game.logic()
+        if cansee2 == 1:
+            print("Maybe theres something inside that door...")
+            l2game.logic()
+        if cansee2 == 3:
+            print("That axe looks handy. I should pick it up.")
+            l2game.logic()
 
     #INTRO, IT IS ONLY CALLED FOR ONCE BY THE LOCK OPENING IN l1.
     def l2gameintro():
@@ -1261,8 +1352,39 @@ class l2game:
 
     #ENDS THE GAME - TO IMPLEMENT
     def endl2():
-        print('yeet')
-
+        os.system('cls')
+        print('You pull the axe out of the chopping block.')
+        print('')
+        time.sleep(2)
+        print("You hear stomping on the stairs outside.")
+        print('')
+        time.sleep(2)
+        print("Before you know it, the door opens.")
+        print('')
+        time.sleep(2)
+        print("It reveals a deranged, deformed man. He runs at you.")
+        print('')
+        time.sleep(2)
+        print("Before you can take any action, he hits you on the head.")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        print("eaearf2023j0qjdj121wj20rj0j1js0js0fje0j20jfc01j0fj0j20jf0j20jf0jvnmnsinwndoo3nfo4noinwoindoin3oinwonoqon2ondowno2ndonwon")
+        time.sleep(4)
+        l2game.outro()
+        
     #COMMAND PROCESSING
     def logic():
         choice = input(">> ")
@@ -1278,6 +1400,16 @@ class l2game:
         if 'look lantern' in choice:
             l2game.lookcommands()
         if 'look crag' in choice:
+            l2game.lookcommands()
+        if 'look matchbox' in choice:
+            l2game.lookcommands()
+        if 'look stick' in choice:
+            l2game.lookcommands()
+        if 'look spoon' in choice:
+            l2game.lookcommands()
+        if 'look knife' in choice:
+            l2game.lookcommands()
+        if 'look keys' in choice:
             l2game.lookcommands()
         
 
@@ -1296,8 +1428,35 @@ class l2game:
             l2game.pickupcommands()
         if 'pick-up bandage' in choice:
             l2game.pickupcommands()
+        if 'pick-up axe' in choice:
+            l2game.pickupcommands()
+
+        #USE COMMANDS
+        if 'use lantern' in choice:
+            l2game.usecommands()
+        if 'use lockpick' in choice:
+            l2game.usecommands()
+        if 'use rope' in choice:
+            l2game.usecommands()
+        if 'use axe' in choice:
+            l2game.usecommands()
+        if 'use keys' in choice:
+            l2game.usecommands()
+        if 'use knife' in choice:
+            l2game.usecommands()
+        if 'use bandage' in choice:
+            l2game.usecommands()
+        if 'use spoon' in choice:
+            l2game.usecommands()
+        if 'use stick' in choice:
+            l2game.usecommands()
+        if 'use matchbox' in choice:
+            l2game.usecommands()
+
 
         #EXTRA COMMANDS
+        if 'hint' in choice:
+            l2game.hint()
         if 'inventory' in choice:
             l2game.inventory()
         if 'crag' in choice:
@@ -1309,6 +1468,43 @@ class l2game:
             print("I didn't understand what you meant. Try again.")
             l2game.logic()
     time.sleep(2)
+    def outro():
+        print("""
+          _____                    _____                    _____                    _____                    _____                _____                    _____          
+         /\    \                  /\    \                  /\    \                  /\    \                  /\    \              /\    \                  /\    \         
+        /::\    \                /::\    \                /::\    \                /::\    \                /::\    \            /::\    \                /::\    \        
+       /::::\    \              /::::\    \              /::::\    \              /::::\    \               \:::\    \           \:::\    \              /::::\    \       
+      /::::::\    \            /::::::\    \            /::::::\    \            /::::::\    \               \:::\    \           \:::\    \            /::::::\    \      
+     /:::/\:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/\:::\    \               \:::\    \           \:::\    \          /:::/\:::\    \     
+    /:::/  \:::\    \        /:::/__\:::\    \        /:::/__\:::\    \        /:::/  \:::\    \               \:::\    \           \:::\    \        /:::/__\:::\    \    
+   /:::/    \:::\    \      /::::\   \:::\    \      /::::\   \:::\    \      /:::/    \:::\    \              /::::\    \          /::::\    \       \:::\   \:::\    \   
+  /:::/    / \:::\    \    /::::::\   \:::\    \    /::::::\   \:::\    \    /:::/    / \:::\    \    ____    /::::::\    \        /::::::\    \    ___\:::\   \:::\    \  
+ /:::/    /   \:::\    \  /:::/\:::\   \:::\____\  /:::/\:::\   \:::\    \  /:::/    /   \:::\ ___\  /\   \  /:::/\:::\    \      /:::/\:::\    \  /\   \:::\   \:::\    \ 
+/:::/____/     \:::\____\/:::/  \:::\   \:::|    |/:::/__\:::\   \:::\____\/:::/____/     \:::|    |/::\   \/:::/  \:::\____\    /:::/  \:::\____\/::\   \:::\   \:::\____\
+\:::\    \      \::/    /\::/   |::::\  /:::|____|\:::\   \:::\   \::/    /\:::\    \     /:::|____|\:::\  /:::/    \::/    /   /:::/    \::/    /\:::\   \:::\   \::/    /
+ \:::\    \      \/____/  \/____|:::::\/:::/    /  \:::\   \:::\   \/____/  \:::\    \   /:::/    /  \:::\/:::/    / \/____/   /:::/    / \/____/  \:::\   \:::\   \/____/ 
+  \:::\    \                    |:::::::::/    /    \:::\   \:::\    \       \:::\    \ /:::/    /    \::::::/    /           /:::/    /            \:::\   \:::\    \     
+   \:::\    \                   |::|\::::/    /      \:::\   \:::\____\       \:::\    /:::/    /      \::::/____/           /:::/    /              \:::\   \:::\____\    
+    \:::\    \                  |::| \::/____/        \:::\   \::/    /        \:::\  /:::/    /        \:::\    \           \::/    /                \:::\  /:::/    /    
+     \:::\    \                 |::|  ~|               \:::\   \/____/          \:::\/:::/    /          \:::\    \           \/____/                  \:::\/:::/    /     
+      \:::\    \                |::|   |                \:::\    \               \::::::/    /            \:::\    \                                    \::::::/    /      
+       \:::\____\               \::|   |                 \:::\____\               \::::/    /              \:::\____\                                    \::::/    /       
+        \::/    /                \:|   |                  \::/    /                \::/____/                \::/    /                                     \::/    /        
+         \/____/                  \|___|                   \/____/                  ~~                       \/____/                                       \/____/         
+
+        """)
+        time.sleep(2)
+        print("Coding: Nathanial Landers & Leyton Frecklington")
+        print("Story: Nathanial Landers & Leyton Frecklington")
+        print("IPO Diagram: Leyton Frecklington")
+        print("UI Mockup: Nathanial Landers")
+        print("Documentation: Nathanial Landers & Leyton Frecklington")
+        print("Special Thanks To:")
+        print("Mr. Edwards for starring as Crag")
+        print("(C) Nathanial Landers & Leyton Frecklington")
+        time.sleep(5)
+        setup.startup()
+
 
 setup.startup()
 
