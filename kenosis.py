@@ -742,7 +742,15 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                print("You do not have a stick.")
                time.sleep(2)
                game.logic()
-
+        if "use stick" in choiceg:
+            if "stick" in game.inventorys:
+                print(game.stick)
+                print("Maybe you could use this stick as a torch, if only you had something to light it.")
+                time.sleep(2)
+                game.logic()
+            else:
+                print("You do not have a stick.")
+                game.logic()
 # use spoon logics
     def usespoonall():
         if "use spoon on lock" in choiceg:
@@ -773,6 +781,14 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 print("You are out of matches.")
                 time.sleep(2)
                 game.logic()
+        if "use spoon" in choiceg:
+            if "spoon" in game.inventorys:
+                print(game.spoon)
+                print("You think this spoon could be useful, but what for...?")
+                time.sleep()
+            else:
+                print("You don't have a spoon.")
+
     def canuselock():
         if game.spoonlock == 1:
             game.usespoonlogic()
@@ -1059,6 +1075,7 @@ class l2game:
 
     # LOOK COMMANDS
     def lookcommands():
+        global cansee2
         if 'look all' in choicel2:
             print("You glance around, and you can't see much.")
             if cansee2 == 0:
@@ -1108,7 +1125,11 @@ class l2game:
             print(game.knife)
             print("You look at the knife. It's visibly sharp, and could be used as a weapon.")
             l2game.logic()
-
+        if 'look bandage' in choicel2:
+            print(game.bandage)
+            print("You pick up the bandage. It appears to be 2 bandages balled up, this could be used for later")
+            l2game.logic()
+        
 
 
 
@@ -1128,11 +1149,12 @@ class l2game:
                 print(game.lantern)
                 print("You pick-up the lantern. You can see more of the building now.")
                 l2game.inventorys.append('lantern')
+                global cansee2
                 cansee2 = 1
                 l2game.logic()
             if 'lantern' in l2game.inventorys:
                 print("You already have the lantern.")
-                l2game.logic
+                l2game.logic()
         if 'pick-up rope' in choicel2:
          if doorclosed == 0:
                 if 'rope' not in l2game.inventorys:
@@ -1179,8 +1201,35 @@ class l2game:
                 l2game.logic()
 
     #USE COMMANDS
-
-
+    def useall():
+        if 'use lantern' in choicel2:
+            if 'lantern' in l2game.inventorys:
+                print(game.lantern)
+                print("You fire up the lantern a bit more with the dial. It doesn't make much of a difference.")
+                l2game.logic()
+            else:
+                print("You don't have a lantern.")
+                l2game.logic()
+        if 'use keys' in choicel2:
+            if 'keys' in l2game.inventorys:
+                print(game.keys)
+                print("You can't find a use for the keys, maybe there is a lock around here somewhere...")
+                l2game.logic()
+            else:
+                print("You don't have keys.")
+                l2game.logic()
+        if 'use keys door' in choicel2:
+            if 'keys' in l2game.inventorys:
+                print(game.keys)
+                print("You try the keys in the door. After a bit of wriggling, you manage to turn the lock. The door swings open.")
+                time.sleep(2)
+                print("You are immediately hit with a waft of rotting flesh. As you look inside the room, you see a body hanging from the roof, and an bloody axe in a wood block.")
+                global cansee2
+                cansee2 = 2
+                l2game.logic()
+            else:
+                print("You don't have any keys.")
+                l2game.logic()
     #INVENTORY
     inventorys = []
     def inventory():
@@ -1230,6 +1279,7 @@ class l2game:
             l2game.lookcommands()
         if 'look crag' in choice:
             l2game.lookcommands()
+        
 
         #PICK-UP COMMANDS
         if 'pick-up lantern' in choice:
@@ -1248,6 +1298,8 @@ class l2game:
             l2game.pickupcommands()
 
         #EXTRA COMMANDS
+        if 'inventory' in choice:
+            l2game.inventory()
         if 'crag' in choice:
             print(game.crag)
             l2game.logic()
@@ -1321,7 +1373,7 @@ setup.startup()
         - If no: clear all text (again, if you can do that) and restart game, forcing player to go through it all to complete
 
 If yes: give achievement: The easy way out
-If no: give achievement: A real competitor
+If no: give achievement: A real bean
 
 Scroll credits
 
