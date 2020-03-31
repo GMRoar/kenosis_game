@@ -1080,20 +1080,24 @@ class l2game:
         global cansee2
         if 'look all' in choicel2:
             print("You glance around, and you can't see much.")
+            print("")
             time.sleep(2)
             if cansee2 == 0:
                 print("You see a lantern hanging in the corner of the room.")
+                print("")
                 l2game.logic()
             elif cansee2 == 1:
                 print("You wave the lantern around the room. You see a pack of lockpicks, a ring of keys and a knife, sitting on a pew.")
+                print("")
                 time.sleep(2)
                 print("This must be a church.")
+                print("")
                 time.sleep(2)
                 print("You see a locked door behind the stage. Maybe you should go have a look?")
+                print("")
                 time.sleep(2)
                 l2game.logic()
             elif cansee == 3:
-                print("yeet")
                 endl2()
         if 'look lockpick' in choicel2:
             print(game.lockpick)
@@ -1108,6 +1112,7 @@ class l2game:
         if 'look lantern' in choicel2:
             print(game.lantern)
             print("You look at the lantern. It's a parrafin oil lantern, that is pretty dim.")
+            print("")
             time.sleep(2)
             print("It looks like it will have enough oil to last a few hours.")
             l2game.logic()
